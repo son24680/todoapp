@@ -2,6 +2,7 @@
   <div class='todo-item'>
     <p class='todo-item__text'>{{todo.text}}</p>
     <div class='todo-item__delete' @click='deleteItem(todo)'>-</div>
+    <div class='todo-item__update' @click='updateItem(todo)'>-</div>
   </div>
 </template>
 
@@ -13,22 +14,9 @@
       deleteItem(todo) {
         this.$emit('delete', todo);
       },
+      updateItem(todo) {
+        this.$emit('update', todo);
+      },
     },
   };
 </script>
-
-<style lang="scss">
-  .todo-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    * {
-      padding: 6px;
-    }
-
-    &__delete {
-      cursor: pointer;
-    }
-  }
-</style>
