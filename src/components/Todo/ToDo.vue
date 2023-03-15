@@ -6,6 +6,9 @@
           <div class='todo__content'>
             <ToDoItem v-for='todo in list' :todo='todo' @delete='onDeleteItem' :key='todo.id' />
           </div>
+          <div class='todo__content'>
+            <ToDoItem v-for='todo in list' :todo='todo' @update='oncreateNewToDoItem' :key='todo.id' />
+          </div>
           <div class='todo__form'>
             <input type='text' v-model='todo' v-on:keyup.enter='createNewToDoItem'>
             <input type="submit" class='todo__add' value='+' @click="createNewToDoItem"/>
@@ -28,11 +31,15 @@
         list: [
           {
             id: 1,
-            text: 'create vue todo',
+            text: 'Learn HTML',
           },
           {
             id: 2,
-            text: 'create react todo',
+            text: 'Learn CSS',
+          },
+          {
+            id: 3,
+            text: 'Learn ReactJS',
           },
         ],
         todo: '',
@@ -49,21 +56,12 @@
         this.list.push({ id: newId, text: this.todo });
         this.todo = '';
       },
+      onUpdate() {
+          this.list = this.list.map(item => item !== this.todo);
+      },
       onDeleteItem(todo) {
         this.list = this.list.filter(item => item !== todo);
       },
     },
   };
 </script>
-<style lang="scss" scoped>
-    @import '../../styles/_colors';
-  
-    .todo {
-      display: block;
-  
-      &__add {
-        color: $main;
-        font-size: 18px;
-      }
-    }
-</style>
